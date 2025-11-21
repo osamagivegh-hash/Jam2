@@ -24,6 +24,41 @@ body {
   transform: translateX(24px);
 }
 
+.hero-marquee {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-track {
+  display: flex;
+  height: 100%;
+  width: 200%;
+  animation: heroMarquee 35s linear infinite;
+}
+
+.hero-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05);
+}
+
+@media (min-width: 768px) {
+  .hero-slide {
+    flex-basis: 50%;
+  }
+}
+
+@keyframes heroMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes heroSlide {
   0% {
     transform: translateX(24px);

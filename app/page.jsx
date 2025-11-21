@@ -106,6 +106,7 @@ function HeroSection(){
   const autoPlayRef = useRef(null);
 
   const slideCount = heroSlides.length;
+  const slideWidth = 100 / slideCount;
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slideCount);
 
@@ -176,7 +177,11 @@ function HeroSection(){
             <div
               key={slide.src}
               className="hero-slide"
-              style={{ backgroundImage: `url(${slide.src})` }}
+              style={{
+                backgroundImage: `url(${slide.src})`,
+                width: `${slideWidth}%`,
+                minWidth: `${slideWidth}%`,
+              }}
               role="img"
               aria-label={slide.alt}
               aria-hidden={currentSlide !== index}

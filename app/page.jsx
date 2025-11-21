@@ -113,21 +113,27 @@ export default function Home(){
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="rounded-card p-6 relative overflow-hidden bg-white/10 text-[var(--color-primary-dark)]">
-                <div className="absolute -left-16 -top-16 h-40 w-40 rounded-full bg-[var(--color-primary)] opacity-20" />
-                <div className="absolute -right-20 -bottom-12 h-52 w-52 rounded-full bg-[var(--color-accent)] opacity-30" />
-                <div className="relative space-y-4">
-                  <h3 className="text-2xl font-extrabold text-[var(--color-primary-dark)]">بيت العطاء الرقمي</h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    رحلة تبرع متكاملة تشبه مواقع الأسرة الخيرية الحديثة: تصميم نظيف، مسارات دفع سهلة، وتقارير تفاعلية تشبه روح المودة.
-                  </p>
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    {["دفع آمن","تتبع مباشر","حوكمة واضحة","مبادرات موثقة"].map((label) => (
-                      <div key={label} className="rounded-2xl border border-[var(--color-muted)] bg-white/70 px-3 py-3 shadow-sm flex items-center gap-2">
-                        <ShieldCheck className="h-4 w-4 text-[var(--color-primary-dark)]" />
-                        <span className="font-semibold text-slate-800">{label}</span>
-                      </div>
-                    ))}
+              <div className="relative overflow-hidden rounded-[32px] border border-white/20 shadow-2xl bg-white/10">
+                <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-primary)]/25 via-transparent to-transparent" aria-hidden />
+                <img
+                  src="https://images.unsplash.com/photo-1509099836639-18ba02e2e2b2?auto=format&fit=crop&w=1400&q=80"
+                  alt="متطوعة تقدم المساعدة"
+                  className="hero-photo"
+                />
+                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_20%_30%,_rgba(245,179,18,0.2),_transparent_35%),_radial-gradient(circle_at_80%_70%,_rgba(12,124,134,0.25),_transparent_32%)]" aria-hidden />
+                <div className="absolute bottom-4 inset-x-4 grid grid-cols-2 gap-3 text-right">
+                  <div className="rounded-2xl bg-white/85 backdrop-blur border border-[var(--color-muted)] p-4 shadow-lg">
+                    <p className="text-xs text-slate-500">موثوقية العمليات</p>
+                    <p className="text-lg font-extrabold text-[var(--color-primary-dark)]">96% استجابة</p>
+                  </div>
+                  <div className="rounded-2xl bg-white/85 backdrop-blur border border-[var(--color-muted)] p-4 shadow-lg flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-[var(--color-primary-dark)]">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500">طرق آمنة</p>
+                      <p className="text-sm font-semibold text-[var(--color-primary-dark)]">بوابات دفع ورصد مباشر</p>
+                    </div>
                   </div>
                 </div>
               </div>

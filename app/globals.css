@@ -18,6 +18,24 @@ body {
   direction: rtl;
 }
 
+.hero-photo {
+  @apply w-full h-full object-cover;
+  animation: heroSlide 12s ease-in-out infinite;
+  transform: translateX(24px);
+}
+
+@keyframes heroSlide {
+  0% {
+    transform: translateX(24px);
+  }
+  50% {
+    transform: translateX(-24px);
+  }
+  100% {
+    transform: translateX(24px);
+  }
+}
+
 .section {
   @apply py-20;
 }

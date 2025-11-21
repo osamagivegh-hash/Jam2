@@ -18,30 +18,30 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// ضع مسارات صورك في المصفوفة التالية (أضف ملفاتك في مجلد /public/hero/)
+// ضع مسارات صورك في المصفوفة التالية (أضف ملفاتك في مجلد /public/hero/) — توجد صور افتراضية جاهزة للعرض والاختبار
 const heroSlides = [
   {
-    src: "/hero/slide1.jpg",
+    src: "/hero/slide1.svg",
     alt: "عائلة تستفيد من مشاريع المياه",
     title: "مياه نظيفة تحفظ كرامة الأسر",
   },
   {
-    src: "/hero/slide2.jpg",
+    src: "/hero/slide2.svg",
     alt: "متطوعون يقدّمون مساعدات غذائية",
     title: "سلال غذائية تصل للأسر الأشد حاجة",
   },
   {
-    src: "/hero/slide3.jpg",
+    src: "/hero/slide3.svg",
     alt: "طلاب يتلقون تعليمًا نوعيًا",
     title: "برامج تعليمية تمكّن الجيل القادم",
   },
   {
-    src: "/hero/slide4.jpg",
+    src: "/hero/slide4.svg",
     alt: "متطوعون يحضّرون السلال الإغاثية",
     title: "فرق ميدانية مدرّبة تعمل بمعايير سلامة",
   },
   {
-    src: "/hero/slide5.jpg",
+    src: "/hero/slide5.svg",
     alt: "قرية تنعم ببنية تحتية جديدة للمياه",
     title: "بنية تحتية تعيد الحياة للقرى البعيدة",
   },

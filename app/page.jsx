@@ -167,7 +167,10 @@ function HeroSection(){
       >
         <div
           className="hero-track"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          style={{
+            transform: `translateX(-${(currentSlide * 100) / slideCount}%)`,
+            width: `${slideCount * 100}%`,
+          }}
         >
           {heroSlides.map((slide, index) => (
             <div

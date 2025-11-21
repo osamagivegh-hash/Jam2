@@ -18,26 +18,32 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// ضع مسارات صورك في المصفوفة التالية (أضف ملفاتك في مجلد /public/hero/)
 const heroSlides = [
   {
-    src: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1400&q=80",
-    alt: "طفل يستخدم مضخة مياه نظيفة",
+    src: "/hero/slide1.jpg",
+    alt: "عائلة تستفيد من مشاريع المياه",
+    title: "مياه نظيفة تحفظ كرامة الأسر",
   },
   {
-    src: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=1400&q=80",
-    alt: "متطوعون يوزعون مساعدات غذائية",
+    src: "/hero/slide2.jpg",
+    alt: "متطوعون يقدّمون مساعدات غذائية",
+    title: "سلال غذائية تصل للأسر الأشد حاجة",
   },
   {
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
-    alt: "معلّم يعمل مع الأطفال في فصل دراسي",
+    src: "/hero/slide3.jpg",
+    alt: "طلاب يتلقون تعليمًا نوعيًا",
+    title: "برامج تعليمية تمكّن الجيل القادم",
   },
   {
-    src: "https://images.unsplash.com/photo-1509099836639-18ba02e37b13?auto=format&fit=crop&w=1400&q=80",
-    alt: "متطوع يجهز مواد إغاثية للمجتمع",
+    src: "/hero/slide4.jpg",
+    alt: "متطوعون يحضّرون السلال الإغاثية",
+    title: "فرق ميدانية مدرّبة تعمل بمعايير سلامة",
   },
   {
-    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
-    alt: "مشهد ريفي بعد توفير بنية تحتية للمياه",
+    src: "/hero/slide5.jpg",
+    alt: "قرية تنعم ببنية تحتية جديدة للمياه",
+    title: "بنية تحتية تعيد الحياة للقرى البعيدة",
   },
 ];
 
@@ -110,7 +116,7 @@ function HeroSection(){
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
-    autoPlayRef.current = setInterval(nextSlide, 4000);
+    autoPlayRef.current = setInterval(nextSlide, 5000);
   };
 
   useEffect(() => {
@@ -143,21 +149,41 @@ function HeroSection(){
     touchStartX.current = null;
   };
 
+  const pauseAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  };
+
   return (
     <section className="hero-section">
       <div
         className="hero-visual"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onMouseEnter={pauseAutoPlay}
+        onMouseLeave={restartAutoPlay}
       >
         <div
           className="hero-track"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {heroSlides.map((slide) => (
-            <div key={slide.src} className="hero-slide">
-              <img src={slide.src} alt={slide.alt} loading="lazy" />
-              <div className="hero-slide-overlay" />
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.src}
+              className="hero-slide"
+              style={{ backgroundImage: `url(${slide.src})` }}
+              role="img"
+              aria-label={slide.alt}
+              aria-hidden={currentSlide !== index}
+            >
+              <div className="hero-slide-sheen" />
+              {slide.title && (
+                <div className="hero-slide-caption">
+                  <p className="font-bold text-sm text-white/90">{slide.title}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -184,17 +210,17 @@ function HeroSection(){
       <div className="container hero-layer">
         <div className="hero-text-box">
           <p className="hero-kicker">معاً لصناعة أثر مستدام</p>
-          <h1 className="hero-title">جمعية إنماء الخيرية</h1>
+          <h1 className="hero-title">نحن جمعية إنماء الخيرية</h1>
           <p className="hero-subtitle">
-            نمنح الحياة فرصًا جديدة عبر برامج تنموية مبتكرة
+            نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. نجمع خبرتنا الميدانية مع حوكمة دقيقة لنضمن أن يصل عطاؤكم إلى من يستحقه بأعلى كفاءة وشفافية.
           </p>
           <div className="hero-actions">
             <a href="#contact" className="btn-primary px-7 py-3 text-base">
               تبرع الآن
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="#programs" className="btn-outline px-7 py-3 text-base">
-              استكشف برامجنا
+            <a href="#about" className="btn-outline px-7 py-3 text-base">
+              اطلع على تفاصيل أكثر
             </a>
           </div>
         </div>

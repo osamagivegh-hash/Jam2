@@ -1,29 +1,36 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
 
+const links = [
+  { href: "#about", label: "من نحن" },
+  { href: "#programs", label: "برامجنا" },
+  { href: "#initiatives", label: "مبادرات" },
+  { href: "#impact", label: "الأثر" },
+  { href: "#contact", label: "تواصل" },
+];
+
 export default function Footer(){
   return (
-    <footer className="bg-slate-900 text-white py-10">
+    <footer className="bg-[var(--color-primary-dark)] text-white pt-12 pb-8 mt-16">
       <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 items-start">
-        <div className="space-y-3">
-          <h3 className="text-lg font-bold">جمعية إنماء الخيرية</h3>
-          <p className="text-sm text-slate-200 leading-relaxed">
+        <div className="space-y-3 text-right">
+          <h3 className="text-2xl font-extrabold">جمعية إنماء الخيرية</h3>
+          <p className="text-sm text-white/80 leading-relaxed">
             نعمل لنشر الأمل عبر برامج مستدامة في المياه والتعليم والرعاية المجتمعية، مع التزام كامل بالشفافية والحوكمة.
           </p>
         </div>
-        <div>
+        <div className="text-right">
           <h4 className="font-semibold mb-3">روابط سريعة</h4>
-          <div className="grid grid-cols-2 gap-2 text-sm text-slate-200">
-            <a href="#about" className="hover:text-brandLight">من نحن</a>
-            <a href="#pillars" className="hover:text-brandLight">برامجنا</a>
-            <a href="#initiatives" className="hover:text-brandLight">مبادرات</a>
-            <a href="#impact" className="hover:text-brandLight">الأثر</a>
-            <a href="#contact" className="hover:text-brandLight">تواصل</a>
-            <a href="#contact" className="hover:text-brandLight">سياسة الخصوصية</a>
+          <div className="grid grid-cols-2 gap-2 text-sm text-white/80">
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-white">
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-3 text-right">
           <h4 className="font-semibold">تواصل اجتماعي</h4>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-end gap-3">
             {[Facebook, Twitter, Instagram].map((Icon) => (
               <a
                 key={Icon.displayName}
@@ -34,7 +41,9 @@ export default function Footer(){
               </a>
             ))}
           </div>
-          <p className="text-xs text-slate-400">© {new Date().getFullYear()} جميع الحقوق محفوظة</p>
+          <p className="text-xs text-white/70">
+            © 2025 جمعية إنماء الخيرية. جميع الحقوق محفوظة.
+          </p>
         </div>
       </div>
     </footer>

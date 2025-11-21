@@ -7,9 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brandBlue: "#1E3A8A",
-        brandLight: "#DBEAFE",
-        brandGray: "#F3F4F6",
+        brandPrimary: "#0fa3b1",
+        brandPrimaryDark: "#0c7c86",
+        brandAccent: "#f5b312",
+        brandSoft: "#f1f9f9",
+        brandMuted: "#e6f3f4",
+      },
+      fontFamily: {
+        tajawal: ['"Tajawal"', "sans-serif"],
       },
     },
   },

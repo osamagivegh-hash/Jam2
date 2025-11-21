@@ -1,60 +1,77 @@
-import { ArrowRight, Droplet, HeartHandshake, Sparkles, BookOpenCheck, ShieldCheck, Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import {
+  ArrowRight,
+  Droplet,
+  HeartHandshake,
+  Sparkles,
+  BookOpenCheck,
+  ShieldCheck,
+  Phone,
+  Mail,
+  MapPin,
+  ArrowUpRight,
+  HandHeart,
+  GraduationCap,
+} from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const stats = [
-  { label: "مستفيد مباشر", value: "120,000+", description: "وصلتهم الخدمات الصحية والتعليمية" },
-  { label: "بئر مكتمل", value: "430", description: "تم حفرها وتشغيلها في مناطق عطشى" },
-  { label: "يتيم مكفول", value: "2,700", description: "يتلقون رعاية شاملة ومستدامة" },
-  { label: "حلقات تحفيظ", value: "180", description: "تخرّج منها حفظة للقرآن" },
+const heroStats = [
+  "أكثر من 3.1M لتر مياه نقية",
+  "8,500 جلسة تعليمية",
+  "42,000 وجبة تغذية",
+  "تدخلات طارئة بنسبة استجابة 96%",
 ];
 
-const pillars = [
-  {
-    title: "آبار الحياة",
-    description: "من الدراسات الفنية وحتى حفل التدشين، نوفّر مياه نقية تعيد الحياة للقرى البعيدة.",
-    icon: Droplet,
-    color: "from-sky-100 via-sky-50 to-white",
-  },
-  {
-    title: "كفالة اليتيم",
-    description: "برامج رعاية متكاملة تشمل التعليم، الصحة، والدعم النفسي لضمان مستقبل أفضل.",
-    icon: HeartHandshake,
-    color: "from-indigo-100 via-indigo-50 to-white",
-  },
-  {
-    title: "تحفيظ القرآن",
-    description: "نرعى حلقات تحفيظ عصرية مجهّزة بالمعلمين والمصاحف والمقار الآمنة.",
-    icon: BookOpenCheck,
-    color: "from-blue-100 via-blue-50 to-white",
-  },
+const reportCards = [
+  { title: "مياه نقية", value: "+3.1M لتر" },
+  { title: "جلسات تعليمية", value: "8,500" },
+  { title: "وجبات تغذية", value: "42,000" },
+  { title: "حالات طوارئ", value: "96%" },
 ];
 
-const highlights = [
-  "حَوْكمة مالية بشفافية وتقارير دورية للمانحين.",
-  "شراكات معتمدة مع جهات دولية ومحلية.",
-  "مسارات تبرع سريعة وآمنة عبر قنوات متعددة.",
-  "فرق ميدانية مدربة تعمل وفق معايير السلامة والجودة.",
-];
-
-const initiatives = [
+const initiativeCards = [
   {
+    tag: "المياه • موثقة",
     title: "مضخة الأمل",
     desc: "حفر بئر سطحي مع خزان ومضخة كهربائية لتأمين المياه لـ 250 مستفيد يوميًا.",
-    badge: "المياه",
     amount: "5,500 ر.س",
   },
   {
+    tag: "رعاية • موثقة",
     title: "كفالة يتيم لعام",
-    desc: "تغطية مصروفات التعليم والرعاية الصحية والبرامج الوجدانية ليتم واحد لمدة 12 شهرًا.",
-    badge: "رعاية",
+    desc: "تغطية مصروفات التعليم والرعاية الصحية والبرامج الوجدانية ليَتيم واحد لمدة 12 شهرًا.",
     amount: "2,400 ر.س",
   },
   {
+    tag: "القرآن • موثقة",
     title: "حِلْقة نور",
     desc: "تجهيز حلقة تحفيظ كاملة بالمصاحف، الوسائل التقنية، وحوافز التميز لمدة فصل دراسي.",
-    badge: "القرآن",
     amount: "3,200 ر.س",
+  },
+];
+
+const steps = [
+  "تقييم احتياج ميداني موثق",
+  "توريد وتجهيز وفق المعايير",
+  "متابعة تشغيل وصيانة مستمرة",
+  "تقارير صور وفيديو للأثر",
+];
+
+const programCards = [
+  {
+    icon: Droplet,
+    title: "مسارات المياه",
+    desc: "شبكات مياه نقية وبِنى تحتية تدعم القرى العطشى بمعايير سلامة عالية.",
+  },
+  {
+    icon: GraduationCap,
+    title: "التعليم والتمكين",
+    desc: "برامج تعليمية وتدريبية تفتح آفاقًا جديدة للشباب والأطفال.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "الإغاثة والمساندة",
+    desc: "تدخلات طارئة وسلال غذائية ورعاية متكاملة للأسر الأكثر حاجة.",
   },
 ];
 
@@ -64,177 +81,124 @@ export default function Home(){
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brandBlue via-blue-700 to-slate-900 text-white py-24">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,_#60a5fa,_transparent_45%),_radial-gradient(circle_at_bottom,_#c7d2fe,_transparent_40%)]" />
-        <div
-          className="pointer-events-none absolute inset-5 rounded-[32px] border border-slate-400/35 shadow-[0_0_0_1px_rgba(148,163,184,0.2)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute top-12 right-12 h-14 w-14 rounded-full border border-slate-400/40 shadow-[0_15px_40px_rgba(15,23,42,0.25)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute bottom-10 left-12 h-16 w-16 rounded-3xl border border-slate-400/45 rotate-6"
-          aria-hidden
-        />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-primary-dark)] to-slate-900 text-white pt-16 pb-24">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,_#9ae6f0,_transparent_45%),_radial-gradient(circle_at_bottom,_#0c7c86,_transparent_45%)]" />
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur border border-white/20">
-                <Sparkles className="h-4 w-4 text-brandLight" />
-                <span>مبادرات إنسانية بمعايير عالمية</span>
+            <div className="order-2 lg:order-1 space-y-6 text-right">
+              <div className="inline-flex items-center gap-2 badge bg-white/15 text-white border border-white/20">
+                <Sparkles className="h-4 w-4" />
+                <span>جمعية إنماء الخيرية</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-                نصنع أثرًا إنسانيًا مستدامًا <span className="text-brandLight">يرتقي بالحياة</span>
+                العطاء الذي يصنع أثراً مستداماً.
               </h1>
-              <p className="text-lg text-slate-100 leading-relaxed max-w-xl">
-                نعزز قيم العطاء عبر مشاريع مياه، كفالة الأيتام، وحلقات تحفيظ تواكب احتياجات المجتمعات الأشد حاجة.
+              <p className="text-lg text-slate-100 leading-relaxed max-w-2xl">
+                نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة، ونبتكر البرامج التي تضمن وصول المساندة بأمان وفاعلية للمستفيدين.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <a href="#contact" className="inline-flex items-center gap-2 rounded-full bg-white text-brandBlue px-6 py-3 font-semibold shadow-lg shadow-blue-900/30 transition hover:-translate-y-0.5">
+              <div className="flex flex-wrap gap-3">
+                <a href="#contact" className="btn-primary">
                   تبرع الآن <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href="#pillars" className="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 font-semibold transition hover:bg-white/10">
-                  استكشف البرامج
+                <a href="#initiatives" className="btn-outline">
+                  استكشف مبادراتنا
                 </a>
               </div>
-              <div className="flex items-center gap-6 text-sm text-slate-100/90">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-5 w-5 text-brandLight" />
-                  <span>معايير حوكمة وشفافية</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HeartHandshake className="h-5 w-5 text-brandLight" />
-                  <span>أثر فوري وقابل للقياس</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur shadow-2xl shadow-blue-900/40">
-              <h3 className="text-2xl font-semibold mb-4">رحلة العطاء بخطوات سهلة</h3>
-              <div className="space-y-4">
-                {["اختر المجال الذي يلهمك", "حدد مبلغ التبرع المناسب", "تابع الأثر عبر تقارير شفافة"].map((step, index) => (
-                  <div key={step} className="flex items-start gap-4 bg-white/5 rounded-2xl p-4 border border-white/10">
-                    <div className="h-10 w-10 flex items-center justify-center rounded-full bg-brandLight/20 text-white font-bold border border-white/20">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg">{step}</p>
-                      <p className="text-sm text-slate-100/80">نضمن لك تجربة رقمية موثوقة ودعمًا مباشرًا من فريقنا.</p>
-                    </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
+                {heroStats.map((item) => (
+                  <div key={item} className="stat-pill">
+                    <p className="text-sm font-semibold text-[var(--color-primary-dark)]">{item}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-3 text-sm text-slate-100/90">
-                <div className="rounded-2xl bg-white/10 p-3 border border-white/10">طرق دفع متعددة</div>
-                <div className="rounded-2xl bg-white/10 p-3 border border-white/10">متابعة لحظية للمشاريع</div>
-                <div className="rounded-2xl bg-white/10 p-3 border border-white/10">شراكات معتمدة</div>
-                <div className="rounded-2xl bg-white/10 p-3 border border-white/10">تقارير موثقة بالصور</div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="rounded-card p-6 relative overflow-hidden bg-white/10 text-[var(--color-primary-dark)]">
+                <div className="absolute -left-16 -top-16 h-40 w-40 rounded-full bg-[var(--color-primary)] opacity-20" />
+                <div className="absolute -right-20 -bottom-12 h-52 w-52 rounded-full bg-[var(--color-accent)] opacity-30" />
+                <div className="relative space-y-4">
+                  <h3 className="text-2xl font-extrabold text-[var(--color-primary-dark)]">بيت العطاء الرقمي</h3>
+                  <p className="text-slate-700 leading-relaxed">
+                    رحلة تبرع متكاملة تشبه مواقع الأسرة الخيرية الحديثة: تصميم نظيف، مسارات دفع سهلة، وتقارير تفاعلية تشبه روح المودة.
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    {["دفع آمن","تتبع مباشر","حوكمة واضحة","مبادرات موثقة"].map((label) => (
+                      <div key={label} className="rounded-2xl border border-[var(--color-muted)] bg-white/70 px-3 py-3 shadow-sm flex items-center gap-2">
+                        <ShieldCheck className="h-4 w-4 text-[var(--color-primary-dark)]" />
+                        <span className="font-semibold text-slate-800">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="relative bg-white py-12 shadow-inner overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-3 rounded-[28px] border border-slate-400/40 shadow-[0_0_0_1px_rgba(148,163,184,0.18)]"
-          aria-hidden
-        />
-        <div className="container mx-auto px-4 relative">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="rounded-2xl bg-brandGray p-6 text-center border border-slate-200">
-                <p className="text-3xl font-extrabold text-brandBlue">{stat.value}</p>
-                <p className="text-sm font-semibold text-slate-700 mt-2">{stat.label}</p>
-                <p className="text-xs text-slate-500 mt-1">{stat.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="wave-divider" aria-hidden />
       </section>
 
       {/* About */}
-      <section id="about" className="section bg-gradient-to-b from-brandGray to-white relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-x-4 -top-6 h-24 rounded-full border border-slate-400/30 blur-3xl"
-          aria-hidden
-        />
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center relative">
-          <div className="space-y-6">
-            <h2 className="section-title">من نحن</h2>
-            <p className="section-sub text-left lg:text-right leading-relaxed">
+      <section id="about" className="section bg-white relative">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+          <div className="space-y-4 text-right">
+            <h2 className="section-title text-right">من نحن</h2>
+            <p className="text-slate-700 leading-relaxed text-lg">
               نحن جمعية إنماء الخيرية، نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. فريقنا يعمل بمعايير دولية معتمدة، ويعتمد على الابتكار في تصميم البرامج التي تصل بأمان وفاعلية إلى المستفيدين.
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {highlights.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl bg-white p-4 shadow-sm border border-slate-100">
-                  <span className="h-8 w-8 flex items-center justify-center rounded-full bg-brandLight/40 text-brandBlue font-bold">✓</span>
-                  <p className="text-slate-700 text-sm leading-relaxed">{item}</p>
+            <div className="space-y-3">
+              {["حَوْكمة مالية بشفافية وتقارير دورية للمانحين.", "شراكات معتمدة مع جهات دولية ومحلية.", "مسارات تبرع سريعة وآمنة عبر قنوات متعددة.", "فرق ميدانية مدربة تعمل وفق معايير السلامة والجودة."].map((item) => (
+                <div key={item} className="flex items-start gap-3 rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">
+                  <span className="h-8 w-8 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold">✓</span>
+                  <p className="text-slate-800 leading-relaxed">{item}</p>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-brandLight to-brandGray rounded-3xl blur-3xl opacity-60" />
-            <div className="relative rounded-3xl bg-white p-8 shadow-xl border border-slate-100 space-y-4">
-              <div className="flex items-center justify-between">
+            <div className="rounded-card p-6 mt-4">
+              <div className="flex items-center justify-between mb-4">
                 <div>
                   <p className="text-sm text-slate-500">أحدث تقرير أثر</p>
-                  <p className="text-xl font-bold text-brandBlue">ربع سنوي - 2024</p>
+                  <p className="text-xl font-bold text-[var(--color-primary-dark)]">ربع سنوي - 2024</p>
                 </div>
-                <ShieldCheck className="h-10 w-10 text-brandBlue" />
+                <Sparkles className="h-6 w-6 text-[var(--color-primary-dark)]" />
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl bg-brandGray p-3">
-                  <p className="text-slate-500">مياه نقية</p>
-                  <p className="text-lg font-semibold text-brandBlue">+3.1M لتر</p>
-                </div>
-                <div className="rounded-2xl bg-brandGray p-3">
-                  <p className="text-slate-500">جلسات تعليمية</p>
-                  <p className="text-lg font-semibold text-brandBlue">8,500</p>
-                </div>
-                <div className="rounded-2xl bg-brandGray p-3">
-                  <p className="text-slate-500">وجبات تغذية</p>
-                  <p className="text-lg font-semibold text-brandBlue">42,000</p>
-                </div>
-                <div className="rounded-2xl bg-brandGray p-3">
-                  <p className="text-slate-500">حالات طوارئ</p>
-                  <p className="text-lg font-semibold text-brandBlue">96%</p>
-                </div>
+                {reportCards.map((card) => (
+                  <div key={card.title} className="rounded-2xl bg-[var(--color-soft)] border border-[var(--color-muted)] p-3">
+                    <p className="text-slate-500">{card.title}</p>
+                    <p className="text-lg font-semibold text-[var(--color-primary-dark)]">{card.value}</p>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center justify-between pt-2 text-sm text-brandBlue font-semibold">
-                <span>اطلع على تفاصيل أكثر</span>
+              <div className="flex items-center gap-2 pt-3 text-sm font-semibold text-[var(--color-primary-dark)]">
                 <ArrowUpRight className="h-4 w-4" />
+                <span>اطلع على تفاصيل أكثر</span>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Programs */}
-      <section id="pillars" className="section bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="section-title">برامجنا الرئيسية</h2>
-            <p className="section-sub">
-              نصمم برامج متكاملة تستجيب للاحتياج الفعلي للمجتمع، مع متابعة دقيقة لمؤشرات الأداء والأثر.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {pillars.map((pillar) => (
-              <div key={pillar.title} className={`rounded-3xl bg-gradient-to-br ${pillar.color} p-6 border border-slate-100 shadow-md hover:shadow-xl transition` }>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-12 w-12 rounded-full bg-white text-brandBlue flex items-center justify-center shadow">
-                    <pillar.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-bold text-brandBlue">{pillar.title}</h3>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[{
+              title: "مياه نقية",
+              desc: "آبار وشبكات حديثة تدعم العائلات يومياً.",
+              icon: Droplet,
+            }, {
+              title: "تعليم وتمكين",
+              desc: "بيئات تعليمية آمنة للأطفال والشباب.",
+              icon: BookOpenCheck,
+            }, {
+              title: "رعاية مجتمعية",
+              desc: "دعم نفسي واجتماعي يحفظ الكرامة.",
+              icon: HeartHandshake,
+            }, {
+              title: "حوكمة وموثوقية",
+              desc: "تقارير موثقة ومؤشرات أثر واضحة.",
+              icon: ShieldCheck,
+            }].map((card) => (
+              <div key={card.title} className="rounded-card p-5 card-hover">
+                <div className="h-12 w-12 rounded-2xl bg-[var(--color-muted)] flex items-center justify-center text-[var(--color-primary-dark)] mb-3">
+                  <card.icon className="h-6 w-6" />
                 </div>
-                <p className="text-slate-700 leading-relaxed mb-6">{pillar.description}</p>
-                <div className="flex items-center gap-2 text-brandBlue font-semibold">
-                  استكشف التفاصيل <ArrowRight className="h-4 w-4" />
-                </div>
+                <h3 className="text-lg font-bold text-[var(--color-primary-dark)] mb-2">{card.title}</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -242,31 +206,26 @@ export default function Home(){
       </section>
 
       {/* Initiatives */}
-      <section id="initiatives" className="section bg-gradient-to-br from-brandGray via-white to-brandGray">
+      <section id="initiatives" className="section bg-[var(--color-soft)]">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-10">
-            <div>
-              <h2 className="section-title">مبادرات جاهزة للتبرع</h2>
-              <p className="section-sub text-left lg:text-right">
-                اختر المبادرة التي تلامس قلبك وساهم في تغيير حياة المستفيدين اليوم.
-              </p>
-            </div>
-            <a href="#contact" className="hidden md:inline-flex items-center gap-2 rounded-full bg-brandBlue text-white px-5 py-3 font-semibold shadow hover:-translate-y-0.5 transition">
-              اطلب استشارة <ArrowRight className="h-4 w-4" />
-            </a>
+          <div className="text-center mb-10">
+            <h2 className="section-title">مبادرات جاهزة للتبرع</h2>
+            <p className="section-sub">
+              اختر المبادرة التي تلامس قلبك وساهم في تغيير حياة المستفيدين اليوم.
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {initiatives.map((item) => (
-              <div key={item.title} className="rounded-3xl bg-white p-6 shadow-lg border border-slate-100 hover:shadow-2xl transition">
+            {initiativeCards.map((item) => (
+              <div key={item.title} className="rounded-card p-6 card-hover h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-semibold bg-brandLight/70 text-brandBlue px-3 py-1 rounded-full border border-brandLight">{item.badge}</span>
-                  <span className="text-sm text-slate-500">موثقة</span>
+                  <span className="badge">{item.tag}</span>
+                  <span className="text-xs text-slate-500">موثقة</span>
                 </div>
-                <h3 className="text-xl font-bold text-brandBlue mb-2">{item.title}</h3>
-                <p className="text-slate-700 text-sm leading-relaxed mb-4">{item.desc}</p>
+                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">{item.title}</h3>
+                <p className="text-slate-700 text-sm leading-relaxed flex-1">{item.desc}</p>
                 <div className="flex items-center justify-between mt-6">
-                  <p className="text-lg font-extrabold text-brandBlue">{item.amount}</p>
-                  <a href="#contact" className="text-sm font-semibold text-brandBlue inline-flex items-center gap-1">تبرع الآن <ArrowRight className="h-3 w-3" /></a>
+                  <p className="text-lg font-extrabold text-[var(--color-primary-dark)]">{item.amount}</p>
+                  <a href="#contact" className="btn-outline text-sm px-4 py-2">تبرع الآن</a>
                 </div>
               </div>
             ))}
@@ -276,102 +235,136 @@ export default function Home(){
 
       {/* Impact */}
       <section id="impact" className="section bg-white">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
-          <div className="space-y-4">
-            <h2 className="section-title">الأثر الميداني</h2>
-            <p className="section-sub text-left lg:text-right">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+          <div className="space-y-5 order-2 lg:order-1">
+            <h2 className="section-title text-right">الأثر الميداني</h2>
+            <p className="section-sub text-right">
               نعمل بشراكات محلية موثوقة ونستخدم أنظمة مراقبة رقمية للتأكد من وصول المساعدات للجهات المستهدفة في الوقت المناسب.
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {["تقييم احتياج ميداني موثق", "توريد وتجهيز وفق المعايير", "متابعة تشغيل وصيانة مستمرة", "تقارير صور وفيديو للأثر"].map((item) => (
-                <div key={item} className="rounded-2xl border border-slate-200 p-4 bg-brandGray text-slate-800 font-semibold shadow-sm">
-                  {item}
+            <div className="space-y-3">
+              {steps.map((step, index) => (
+                <div key={step} className="rounded-2xl border border-[var(--color-muted)] bg-[var(--color-soft)] p-4 flex items-center gap-3 shadow-sm">
+                  <div className="h-10 w-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                  <p className="font-semibold text-slate-800">{step}</p>
                 </div>
               ))}
             </div>
-            <div className="inline-flex items-center gap-3 rounded-full bg-brandBlue text-white px-5 py-3 font-semibold shadow">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary-dark)] text-white px-6 py-3 font-semibold shadow-md">
               نعدك بتجربة عطاء شفافة وآمنة
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-8 bg-gradient-to-tr from-brandLight to-blue-100 rounded-3xl blur-2xl opacity-70" />
-            <div className="relative bg-white rounded-3xl shadow-xl border border-slate-100 p-6 space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-500">آخر تحديث</p>
-                  <p className="text-lg font-bold text-brandBlue">المحطة الميدانية - شرق إفريقيا</p>
+          <div className="order-1 lg:order-2">
+            <div className="rounded-card p-6 bg-white relative overflow-hidden">
+              <div className="absolute -left-10 -top-10 h-32 w-32 bg-[var(--color-primary)] opacity-20 rounded-full" />
+              <div className="absolute -right-16 -bottom-16 h-48 w-48 bg-[var(--color-accent)] opacity-20 rounded-full" />
+              <div className="relative space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-slate-500">آخر تحديث</p>
+                    <p className="text-lg font-bold text-[var(--color-primary-dark)]">"المحطة الميدانية - شرق إفريقيا"</p>
+                  </div>
+                  <HandHeart className="h-7 w-7 text-[var(--color-primary-dark)]" />
                 </div>
-                <Sparkles className="h-6 w-6 text-brandBlue" />
-              </div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="rounded-2xl bg-brandGray p-4">
-                  <p className="text-slate-500">مسارات المياه</p>
-                  <p className="text-xl font-bold text-brandBlue">32 مشروعًا</p>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
+                    <p className="text-slate-500">مسارات المياه</p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">32 مشروعًا</p>
+                  </div>
+                  <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
+                    <p className="text-slate-500">حالات طارئة</p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">12 تدخلًا</p>
+                  </div>
+                  <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
+                    <p className="text-slate-500">برامج تعليمية</p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">18 فصلًا</p>
+                  </div>
+                  <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
+                    <p className="text-slate-500">متطوعون</p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">+540</p>
+                  </div>
                 </div>
-                <div className="rounded-2xl bg-brandGray p-4">
-                  <p className="text-slate-500">حالات طارئة</p>
-                  <p className="text-xl font-bold text-brandBlue">12 تدخلًا</p>
+                <div className="rounded-2xl bg-[var(--color-primary)] text-white p-5 flex items-center justify-between shadow-lg">
+                  <div>
+                    <p className="text-sm opacity-90">وقت استجابة البلاغات</p>
+                    <p className="text-2xl font-extrabold"><span className="text-[var(--color-accent)]">48</span> ساعة فقط</p>
+                  </div>
+                  <ArrowUpRight className="h-7 w-7" />
                 </div>
-                <div className="rounded-2xl bg-brandGray p-4">
-                  <p className="text-slate-500">برامج تعليمية</p>
-                  <p className="text-xl font-bold text-brandBlue">18 فصلًا</p>
-                </div>
-                <div className="rounded-2xl bg-brandGray p-4">
-                  <p className="text-slate-500">متطوعون</p>
-                  <p className="text-xl font-bold text-brandBlue">+540</p>
-                </div>
-              </div>
-              <div className="rounded-2xl bg-brandBlue text-white p-5 flex items-center justify-between">
-                <div>
-                  <p className="text-sm opacity-90">وقت استجابة البلاغات</p>
-                  <p className="text-2xl font-extrabold"><span className="text-brandLight">48</span> ساعة فقط</p>
-                </div>
-                <ArrowUpRight className="h-7 w-7" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="section bg-gradient-to-br from-brandBlue via-blue-800 to-slate-900 text-white relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-4 rounded-[34px] border border-slate-400/35 shadow-[0_0_0_1px_rgba(148,163,184,0.2)]"
-          aria-hidden
-        />
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center relative">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-extrabold">تواصل معنا</h2>
-            <p className="text-slate-100/90 leading-relaxed">
-              فريقنا جاهز للإجابة عن أسئلتك وتقديم الاستشارة حول أفضل مسارات العطاء.
+      {/* Programs */}
+      <section id="programs" className="section bg-[var(--color-soft)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="section-title">برامجنا</h2>
+            <p className="section-sub">
+              مسارات متخصصة تضمن أثراً متوازنًا في المياه والتعليم والإغاثة، مع روح عائلية ودعم مستمر.
             </p>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center gap-3"><Phone className="h-5 w-5 text-brandLight" /><span>+966 555 123 456</span></div>
-              <div className="flex items-center gap-3"><Mail className="h-5 w-5 text-brandLight" /><span>support@enmaa.org</span></div>
-              <div className="flex items-center gap-3"><MapPin className="h-5 w-5 text-brandLight" /><span>الرياض - المملكة العربية السعودية</span></div>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a href="tel:+966555123456" className="inline-flex items-center gap-2 rounded-full bg-white text-brandBlue px-5 py-3 font-semibold shadow-lg">
-                اتصال مباشر
-              </a>
-              <a href="mailto:support@enmaa.org" className="inline-flex items-center gap-2 rounded-full border border-white/70 px-5 py-3 font-semibold text-white hover:bg-white/10">
-                أرسل بريدًا
-              </a>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {programCards.map((card) => (
+              <div key={card.title} className="rounded-card p-6 card-hover text-right h-full">
+                <div className="h-12 w-12 rounded-2xl bg-[var(--color-muted)] flex items-center justify-center text-[var(--color-primary-dark)] mb-4">
+                  <card.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">{card.title}</h3>
+                <p className="text-slate-700 leading-relaxed text-sm">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="section bg-gradient-to-br from-[var(--color-muted)] via-[var(--color-soft)] to-[var(--color-muted)] relative overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--color-primary)]/15 to-transparent" aria-hidden />
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start relative">
+          <div className="space-y-4 text-right">
+            <h2 className="text-3xl font-extrabold text-[var(--color-primary-dark)]">تواصل معنا</h2>
+            <p className="text-slate-700 leading-relaxed">
+              ندعو المانحين والشركاء للتواصل معنا لتصميم مسارات عطاء تحقق أثراً فورياً وشفافاً.
+            </p>
+            <div className="space-y-3 text-sm text-slate-700">
+              <div className="flex items-center gap-3 justify-start">
+                <Phone className="h-5 w-5 text-[var(--color-primary-dark)]" />
+                <span>+966 555 123 456</span>
+              </div>
+              <div className="flex items-center gap-3 justify-start">
+                <Mail className="h-5 w-5 text-[var(--color-primary-dark)]" />
+                <span>support@enmaa.org</span>
+              </div>
+              <div className="flex items-center gap-3 justify-start">
+                <MapPin className="h-5 w-5 text-[var(--color-primary-dark)]" />
+                <span>الرياض - المملكة العربية السعودية</span>
+              </div>
             </div>
           </div>
-          <div className="bg-white/8 border border-slate-300/40 rounded-3xl p-8 shadow-2xl shadow-slate-900/30 backdrop-blur space-y-5">
-            <h3 className="text-xl font-bold">مستعد للعطاء؟</h3>
-            <p className="text-slate-100/90 text-sm leading-relaxed">
-              شارك بياناتك وسيتم التواصل معك خلال 24 ساعة لتحديد أفضل فرصة تبرع تناسب أهدافك.
-            </p>
-            <form className="space-y-4">
-              <input type="text" placeholder="الاسم الكامل" className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-slate-200" />
-              <input type="email" placeholder="البريد الإلكتروني" className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-slate-200" />
-              <textarea placeholder="كيف يمكننا مساعدتك؟" rows="3" className="w-full rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-slate-200" />
-              <button type="button" className="w-full rounded-2xl bg-brandLight text-brandBlue font-bold py-3 shadow-lg hover:-translate-y-0.5 transition">
-                أرسل الطلب الآن
+          <div className="rounded-card p-6 bg-white">
+            <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-4">استمارة التواصل</h3>
+            <form className="space-y-3">
+              <input type="text" placeholder="الاسم الكامل" className="contact-input" />
+              <input type="email" placeholder="البريد الإلكتروني" className="contact-input" />
+              <select className="contact-input">
+                <option>تبرع</option>
+                <option>شراكة</option>
+                <option>استفسار عام</option>
+              </select>
+              <textarea rows="4" placeholder="نص الرسالة" className="contact-input" />
+              <button type="button" className="btn-primary w-full justify-center">
+                إرسال الرسالة
               </button>
             </form>
+            <div className="grid grid-cols-3 gap-3 text-center text-xs text-slate-600 mt-4">
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">Email</div>
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">Phone</div>
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">WhatsApp</div>
+            </div>
           </div>
         </div>
       </section>

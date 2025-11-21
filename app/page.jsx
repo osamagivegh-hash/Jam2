@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Droplet,
@@ -14,22 +14,16 @@ import {
   ArrowUpRight,
   HandHeart,
   GraduationCap,
-  CheckCircle2,
 } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const heroImages = [
-  "/images/hero-water.jpg",
-  "/images/hero-education.jpg",
-  "/images/hero-community.jpg",
-];
-
-const heroHighlights = [
-  "حَوْكمة مالية بشفافية وتقارير دورية للمانحين",
-  "شراكات معتمدة مع جهات دولية ومحلية",
-  "مسارات تبرع سريعة وآمنة عبر قنوات متعددة",
-  "فرق ميدانية مدربة تعمل وفق معايير السلامة والجودة",
+const heroSlides = [
+  { src: "https://picsum.photos/seed/inmaa1/1200/600", alt: "مشروع تنموي 1" },
+  { src: "https://picsum.photos/seed/inmaa2/1200/600", alt: "مشروع تنموي 2" },
+  { src: "https://picsum.photos/seed/inmaa3/1200/600", alt: "مشروع تنموي 3" },
+  { src: "https://picsum.photos/seed/inmaa4/1200/600", alt: "مشروع تنموي 4" },
+  { src: "https://picsum.photos/seed/inmaa5/1200/600", alt: "مشروع تنموي 5" },
 ];
 
 const reportCards = [
@@ -85,124 +79,121 @@ const programCards = [
   },
 ];
 
-export default function Home(){
+function HeroSection(){
   const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef(null);
+  const autoPlayRef = useRef(null);
+
+  const slideCount = heroSlides.length;
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slideCount);
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
+
+  const restartAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    autoPlayRef.current = setInterval(nextSlide, 4000);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 6000);
-
-    return () => clearInterval(interval);
+    restartAutoPlay();
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
   }, []);
 
-  return (
-    <>
-      <Header />
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX;
+  };
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden text-white pt-20 pb-28 bg-gradient-to-b from-[#12b4c3] via-[#0fa3b1] to-[#0c7c86]">
-        <div className="absolute inset-0">{/* Slider background */}
-          {heroImages.map((image, index) => (
-            <div
-              key={image}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <img src={image} alt="من مشروعات الجمعية" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0c7c86]/75 via-[#0c7c86]/65 to-[#0c7c86]/85" />
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+
+    const deltaX = event.changedTouches[0].clientX - touchStartX.current;
+
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+      restartAutoPlay();
+    }
+
+    touchStartX.current = null;
+  };
+
+  return (
+    <section className="hero-section">
+      <div
+        className="hero-visual"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div
+          className="hero-track"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {heroSlides.map((slide) => (
+            <div key={slide.src} className="hero-slide">
+              <img src={slide.src} alt={slide.alt} loading="lazy" />
+              <div className="hero-slide-overlay" />
             </div>
           ))}
         </div>
 
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="space-y-6 text-center lg:text-right">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold shadow-md backdrop-blur border border-white/20">
-                <Sparkles className="h-4 w-4" />
-                <span>جمعية معتمدة بمعايير دولية</span>
-              </div>
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.2]">نحن جمعية إنماء الخيرية</h1>
-                <p className="text-lg leading-relaxed text-slate-100">
-                  نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. فريقنا يعمل بمعايير دولية معتمدة، ويعتمد على الابتكار في تصميم البرامج التي تصل بأمان وفاعلية إلى المستفيدين.
-                </p>
-              </div>
-              <ul className="space-y-3 text-base text-white/90">
-                {heroHighlights.map((item) => (
-                  <li key={item} className="flex items-start justify-center gap-3 lg:justify-start">
-                    <span className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 border border-white/20 text-white shadow-sm">
-                      <CheckCircle2 className="h-5 w-5" />
-                    </span>
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <a href="#contact" className="btn-primary px-7 py-3 text-base">
-                  تبرع الآن
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href="#programs" className="btn-outline px-7 py-3 text-base bg-white/10 text-white border-white/30">
-                  تعرف على برامجنا
-                </a>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-2 pt-2">
-                {heroImages.map((image, index) => (
-                  <button
-                    key={image}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      currentSlide === index ? "w-10 bg-white" : "w-3 bg-white/50"
-                    }`}
-                    aria-label={`صورة رقم ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+        <div className="hero-wave" aria-hidden />
 
-            <div className="relative">
-              <div className="absolute -top-8 -left-6 h-24 w-24 rounded-full bg-white/15 blur-3xl" aria-hidden />
-              <div className="absolute -bottom-10 -right-6 h-28 w-28 rounded-full bg-white/10 blur-3xl" aria-hidden />
-              <div className="rounded-card bg-white/95 text-[var(--color-text)] shadow-2xl border border-white/60 px-6 py-7 relative overflow-hidden">
-                <div className="absolute -top-14 -left-14 h-32 w-32 rounded-full bg-[var(--color-primary)]/10" aria-hidden />
-                <div className="absolute -bottom-20 -right-10 h-44 w-44 rounded-full bg-[var(--color-primary-dark)]/10" aria-hidden />
-                <div className="relative flex items-start justify-between gap-3 mb-4">
-                  <div>
-                    <p className="text-sm text-slate-500">أحدث تقرير أثر</p>
-                    <h3 className="text-xl font-extrabold text-[var(--color-primary-dark)]">أحدث تقرير أثر – ربع سنوي 2024</h3>
-                  </div>
-                  <div className="rounded-full bg-[var(--color-muted)] p-2 text-[var(--color-primary-dark)] shadow-inner">
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-                </div>
-                <div className="relative grid grid-cols-2 gap-3 text-sm">
-                  {reportCards.map((card) => (
-                    <div key={card.title} className="rounded-2xl border border-[var(--color-muted)] bg-[var(--color-soft)]/70 p-3 shadow-sm">
-                      <p className="text-slate-600">{card.title}</p>
-                      <p className="text-lg font-bold text-[var(--color-primary-dark)]">{card.value}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-[var(--color-primary-dark)]">
-                    <ArrowUpRight className="h-4 w-4" />
-                    <span>تفاصيل موثقة بالصور والمؤشرات</span>
-                  </div>
-                  <a
-                    href="#impact"
-                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] px-4 py-2 text-sm font-bold text-white shadow-md"
-                  >
-                    اطلع على تفاصيل أكثر
-                  </a>
-                </div>
-              </div>
-            </div>
+        <div className="hero-dots" role="tablist" aria-label="شرائح الصور">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`hero-dot ${currentSlide === index ? "active" : ""}`}
+              onClick={() => {
+                setCurrentSlide(index);
+                restartAutoPlay();
+              }}
+              aria-label={`الشريحة ${index + 1}`}
+              aria-pressed={currentSlide === index}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="container hero-layer">
+        <div className="hero-text-box">
+          <p className="hero-kicker">معاً لصناعة أثر مستدام</p>
+          <h1 className="hero-title">جمعية إنماء الخيرية</h1>
+          <p className="hero-subtitle">
+            نمنح الحياة فرصًا جديدة عبر برامج تنموية مبتكرة
+          </p>
+          <div className="hero-actions">
+            <a href="#contact" className="btn-primary px-7 py-3 text-base">
+              تبرع الآن
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a href="#programs" className="btn-outline px-7 py-3 text-base">
+              استكشف برامجنا
+            </a>
           </div>
         </div>
-        <div className="wave-divider" aria-hidden />
-      </section>
+      </div>
+    </section>
+  );
+}
+
+export default function Home(){
+  return (
+    <>
+      <Header />
+
+      <HeroSection />
 
       {/* About */}
       <section id="about" className="section bg-white relative">

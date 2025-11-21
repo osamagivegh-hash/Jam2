@@ -19,11 +19,26 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 const heroSlides = [
-  { src: "https://picsum.photos/seed/inmaa1/1200/600", alt: "مشروع تنموي 1" },
-  { src: "https://picsum.photos/seed/inmaa2/1200/600", alt: "مشروع تنموي 2" },
-  { src: "https://picsum.photos/seed/inmaa3/1200/600", alt: "مشروع تنموي 3" },
-  { src: "https://picsum.photos/seed/inmaa4/1200/600", alt: "مشروع تنموي 4" },
-  { src: "https://picsum.photos/seed/inmaa5/1200/600", alt: "مشروع تنموي 5" },
+  {
+    src: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1400&q=80",
+    alt: "طفل يستخدم مضخة مياه نظيفة",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=1400&q=80",
+    alt: "متطوعون يوزعون مساعدات غذائية",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
+    alt: "معلّم يعمل مع الأطفال في فصل دراسي",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1509099836639-18ba02e37b13?auto=format&fit=crop&w=1400&q=80",
+    alt: "متطوع يجهز مواد إغاثية للمجتمع",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+    alt: "مشهد ريفي بعد توفير بنية تحتية للمياه",
+  },
 ];
 
 const reportCards = [

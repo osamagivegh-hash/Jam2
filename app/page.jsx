@@ -15,6 +15,14 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+const heroImages = [
+  "https://images.unsplash.com/photo-1601056637637-1b1c75511f59?auto=format&fit=crop&w=1400&q=80",
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80",
+  "https://images.unsplash.com/photo-1519336305162-4b6ed6f0c1c2?auto=format&fit=crop&w=1400&q=80",
+  "https://images.unsplash.com/photo-1513863323964-31c9b122fe1b?auto=format&fit=crop&w=1400&q=80",
+  "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1400&q=80",
+];
+
 const heroStats = [
   "أكثر من 3.1M لتر مياه نقية",
   "8,500 جلسة تعليمية",
@@ -81,61 +89,48 @@ export default function Home(){
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-primary-dark)] to-slate-900 text-white pt-16 pb-24">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,_#9ae6f0,_transparent_45%),_radial-gradient(circle_at_bottom,_#0c7c86,_transparent_45%)]" />
-        <div className="container mx-auto px-4 relative">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="order-2 lg:order-1 space-y-6 text-right">
-              <div className="inline-flex items-center gap-2 badge bg-white/15 text-white border border-white/20">
-                <Sparkles className="h-4 w-4" />
-                <span>جمعية إنماء الخيرية</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-                العطاء الذي يصنع أثراً مستداماً.
-              </h1>
-              <p className="text-lg text-slate-100 leading-relaxed max-w-2xl">
-                نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة، ونبتكر البرامج التي تضمن وصول المساندة بأمان وفاعلية للمستفيدين.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a href="#contact" className="btn-primary">
-                  تبرع الآن <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href="#initiatives" className="btn-outline">
-                  استكشف مبادراتنا
-                </a>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
-                {heroStats.map((item) => (
-                  <div key={item} className="stat-pill">
-                    <p className="text-sm font-semibold text-[var(--color-primary-dark)]">{item}</p>
-                  </div>
-                ))}
-              </div>
+      <section className="relative overflow-hidden bg-slate-900 text-white pt-16 pb-24">
+        <div className="hero-marquee" aria-hidden>
+          <div className="hero-track">
+            {[...heroImages, ...heroImages].map((image, index) => (
+              <img key={`${image}-${index}`} src={image} alt="مشهد إنساني" className="hero-slide" />
+            ))}
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-[var(--color-primary-dark)]/70" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl ml-auto space-y-6 text-right">
+            <div className="inline-flex items-center gap-2 badge bg-white/15 text-white border border-white/20">
+              <Sparkles className="h-4 w-4" />
+              <span>جمعية إنماء الخيرية</span>
             </div>
-            <div className="order-1 lg:order-2">
-              <div className="relative overflow-hidden rounded-[32px] border border-white/20 shadow-2xl bg-white/10">
-                <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-primary)]/25 via-transparent to-transparent" aria-hidden />
-                <img
-                  src="https://images.unsplash.com/photo-1509099836639-18ba02e2e2b2?auto=format&fit=crop&w=1400&q=80"
-                  alt="متطوعة تقدم المساعدة"
-                  className="hero-photo"
-                />
-                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_20%_30%,_rgba(245,179,18,0.2),_transparent_35%),_radial-gradient(circle_at_80%_70%,_rgba(12,124,134,0.25),_transparent_32%)]" aria-hidden />
-                <div className="absolute bottom-4 inset-x-4 grid grid-cols-2 gap-3 text-right">
-                  <div className="rounded-2xl bg-white/85 backdrop-blur border border-[var(--color-muted)] p-4 shadow-lg">
-                    <p className="text-xs text-slate-500">موثوقية العمليات</p>
-                    <p className="text-lg font-extrabold text-[var(--color-primary-dark)]">96% استجابة</p>
-                  </div>
-                  <div className="rounded-2xl bg-white/85 backdrop-blur border border-[var(--color-muted)] p-4 shadow-lg flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-[var(--color-primary-dark)]">
-                      <ShieldCheck className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500">طرق آمنة</p>
-                      <p className="text-sm font-semibold text-[var(--color-primary-dark)]">بوابات دفع ورصد مباشر</p>
-                    </div>
-                  </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">العطاء الذي يصنع أثراً مستداماً.</h1>
+            <p className="text-lg text-slate-100 leading-relaxed">
+              نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة، ونبتكر البرامج التي تضمن وصول المساندة بأمان وفاعلية للمستفيدين.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a href="#contact" className="btn-primary">
+                تبرع الآن <ArrowRight className="h-4 w-4" />
+              </a>
+              <a href="#initiatives" className="btn-outline">
+                استكشف مبادراتنا
+              </a>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
+              {heroStats.map((item) => (
+                <div key={item} className="stat-pill">
+                  <p className="text-sm font-semibold text-[var(--color-primary-dark)]">{item}</p>
                 </div>
+              ))}
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center gap-3 text-sm text-slate-200">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2">
+                <ShieldCheck className="h-4 w-4" />
+                <span>بوابات دفع ورصد مباشر</span>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2">
+                <HandHeart className="h-4 w-4" />
+                <span>موثوقية عمليات بنسبة 96%</span>
               </div>
             </div>
           </div>

@@ -21,27 +21,27 @@ import Footer from "./components/Footer";
 // ضع مسارات صورك في المصفوفة التالية (أضف ملفاتك في مجلد /public/hero/) — توجد صور افتراضية جاهزة للعرض والاختبار
 const heroSlides = [
   {
-    src: "/hero/slide1.svg",
+    src: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80",
     alt: "عائلة تستفيد من مشاريع المياه",
     title: "مياه نظيفة تحفظ كرامة الأسر",
   },
   {
-    src: "/hero/slide2.svg",
+    src: "https://images.unsplash.com/photo-1509099863731-ef4bff19e808?auto=format&fit=crop&w=1600&q=80",
     alt: "متطوعون يقدّمون مساعدات غذائية",
     title: "سلال غذائية تصل للأسر الأشد حاجة",
   },
   {
-    src: "/hero/slide3.svg",
+    src: "https://images.unsplash.com/photo-1518085250887-2f903c200fee?auto=format&fit=crop&w=1600&q=80",
     alt: "طلاب يتلقون تعليمًا نوعيًا",
     title: "برامج تعليمية تمكّن الجيل القادم",
   },
   {
-    src: "/hero/slide4.svg",
+    src: "https://images.unsplash.com/photo-1582719478248-54e9f2afbc4b?auto=format&fit=crop&w=1600&q=80",
     alt: "متطوعون يحضّرون السلال الإغاثية",
     title: "فرق ميدانية مدرّبة تعمل بمعايير سلامة",
   },
   {
-    src: "/hero/slide5.svg",
+    src: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80",
     alt: "قرية تنعم ببنية تحتية جديدة للمياه",
     title: "بنية تحتية تعيد الحياة للقرى البعيدة",
   },

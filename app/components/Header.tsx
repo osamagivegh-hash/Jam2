@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { HeartHandshake, Menu, X } from "lucide-react";
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+};
+
+const navItems: NavItem[] = [
   { href: "#about", label: "من نحن" },
   { href: "#programs", label: "برامجنا" },
   { href: "#initiatives", label: "مبادرات" },
@@ -11,8 +16,8 @@ const navItems = [
   { href: "#contact", label: "تواصل" },
 ];
 
-export default function Header(){
-  const [open, setOpen] = useState(false);
+export default function Header() {
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
@@ -36,10 +41,7 @@ export default function Header(){
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="#contact"
-            className="btn-primary px-5 py-2 shadow-md"
-          >
+          <a href="#contact" className="btn-primary px-5 py-2 shadow-md">
             تبرع الآن
           </a>
         </div>
@@ -48,6 +50,7 @@ export default function Header(){
           className="lg:hidden p-2 rounded-xl border border-slate-200 text-slate-700"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="القائمة"
+          type="button"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>

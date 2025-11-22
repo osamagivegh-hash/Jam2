@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { TouchEvent, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Droplet,
@@ -14,47 +14,71 @@ import {
   ArrowUpRight,
   HandHeart,
   GraduationCap,
+  LucideIcon,
 } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// شرائح الهيرو (ممكن لاحقاً تستبدلها بصور من /public/hero/)
-const heroSlides = [
+type HeroSlide = {
+  src: string;
+  alt: string;
+  title?: string;
+};
+
+type ReportCard = {
+  title: string;
+  value: string;
+};
+
+type InitiativeCard = {
+  tag: string;
+  title: string;
+  desc: string;
+  amount: string;
+};
+
+type ProgramCard = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+};
+
+const heroSlides: HeroSlide[] = [
   {
-    src: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80",
+    src: "https://picsum.photos/1600/900",
     alt: "عائلة تستفيد من مشاريع المياه",
     title: "مياه نظيفة تحفظ كرامة الأسر",
   },
   {
-    src: "https://images.unsplash.com/photo-1509099863731-ef4bff19e808?auto=format&fit=crop&w=1600&q=80",
+    src: "https://picsum.photos/id/1015/1600/900",
     alt: "متطوعون يقدّمون مساعدات غذائية",
     title: "سلال غذائية تصل للأسر الأشد حاجة",
   },
   {
-    src: "https://images.unsplash.com/photo-1518085250887-2f903c200fee?auto=format&fit=crop&w=1600&q=80",
+    src: "https://picsum.photos/id/1005/1600/900",
     alt: "طلاب يتلقون تعليمًا نوعيًا",
     title: "برامج تعليمية تمكّن الجيل القادم",
   },
   {
-    src: "https://images.unsplash.com/photo-1582719478248-54e9f2afbc4b?auto=format&fit=crop&w=1600&q=80",
+    src: "https://picsum.photos/id/1016/1600/900",
     alt: "متطوعون يحضّرون السلال الإغاثية",
     title: "فرق ميدانية مدرّبة تعمل بمعايير سلامة",
   },
   {
-    src: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80",
+    src: "https://picsum.photos/id/1011/1600/900",
     alt: "قرية تنعم ببنية تحتية جديدة للمياه",
     title: "بنية تحتية تعيد الحياة للقرى البعيدة",
   },
 ];
 
-const reportCards = [
+const reportCards: ReportCard[] = [
   { title: "مياه نقية", value: "+3.1M لتر" },
   { title: "جلسات تعليمية", value: "8,500" },
   { title: "وجبات تغذية", value: "42,000" },
   { title: "حالات طوارئ", value: "96%" },
 ];
 
-const initiativeCards = [
+const initiativeCards: InitiativeCard[] = [
   {
     tag: "المياه • موثقة",
     title: "مضخة الأمل",
@@ -75,14 +99,14 @@ const initiativeCards = [
   },
 ];
 
-const steps = [
+const steps: string[] = [
   "تقييم احتياج ميداني موثق",
   "توريد وتجهيز وفق المعايير",
   "متابعة تشغيل وصيانة مستمرة",
   "تقارير صور وفيديو للأثر",
 ];
 
-const programCards = [
+const programCards: ProgramCard[] = [
   {
     icon: Droplet,
     title: "مسارات المياه",
@@ -101,15 +125,14 @@ const programCards = [
 ];
 
 function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
   const touchStartX = useRef<number | null>(null);
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const slideCount = heroSlides.length;
-  const slideWidth = 100 / slideCount; // نسبة عرض الشريحة الواحدة من عرض الـ track
+  const slideWidth = 100 / slideCount;
 
-  const nextSlide = () =>
-    setCurrentSlide((prev) => (prev + 1) % slideCount);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slideCount);
 
   const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
@@ -130,11 +153,11 @@ function HeroSection() {
     };
   }, []);
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0].clientX;
   };
 
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
     if (touchStartX.current === null) return;
 
     const deltaX = event.changedTouches[0].clientX - touchStartX.current;
@@ -189,9 +212,7 @@ function HeroSection() {
               <div className="hero-slide-sheen" />
               {slide.title && (
                 <div className="hero-slide-caption">
-                  <p className="font-bold text-sm text-white/90">
-                    {slide.title}
-                  </p>
+                  <p className="font-bold text-sm text-white/90">{slide.title}</p>
                 </div>
               )}
             </div>
@@ -200,18 +221,12 @@ function HeroSection() {
 
         <div className="hero-wave" aria-hidden />
 
-        <div
-          className="hero-dots"
-          role="tablist"
-          aria-label="شرائح الصور"
-        >
+        <div className="hero-dots" role="tablist" aria-label="شرائح الصور">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               type="button"
-              className={`hero-dot ${
-                currentSlide === index ? "active" : ""
-              }`}
+              className={`hero-dot ${currentSlide === index ? "active" : ""}`}
               onClick={() => {
                 setCurrentSlide(index);
                 restartAutoPlay();
@@ -228,22 +243,14 @@ function HeroSection() {
           <p className="hero-kicker">معاً لصناعة أثر مستدام</p>
           <h1 className="hero-title">نحن جمعية إنماء الخيرية</h1>
           <p className="hero-subtitle">
-            نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. نجمع
-            خبرتنا الميدانية مع حوكمة دقيقة لنضمن أن يصل عطاؤكم إلى من
-            يستحقه بأعلى كفاءة وشفافية.
+            نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. نجمع خبرتنا الميدانية مع حوكمة دقيقة لنضمن أن يصل عطاؤكم إلى من يستحقه بأعلى كفاءة وشفافية.
           </p>
           <div className="hero-actions">
-            <a
-              href="#contact"
-              className="btn-primary px-7 py-3 text-base"
-            >
+            <a href="#contact" className="btn-primary px-7 py-3 text-base">
               تبرع الآن
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href="#about"
-              className="btn-outline px-7 py-3 text-base"
-            >
+            <a href="#about" className="btn-outline px-7 py-3 text-base">
               اطلع على تفاصيل أكثر
             </a>
           </div>
@@ -254,6 +261,36 @@ function HeroSection() {
 }
 
 export default function Home() {
+  const aboutHighlights: { title: string; desc: string; icon: LucideIcon }[] = [
+    {
+      title: "مياه نقية",
+      desc: "آبار وشبكات حديثة تدعم العائلات يومياً.",
+      icon: Droplet,
+    },
+    {
+      title: "تعليم وتمكين",
+      desc: "بيئات تعليمية آمنة للأطفال والشباب.",
+      icon: BookOpenCheck,
+    },
+    {
+      title: "رعاية مجتمعية",
+      desc: "دعم نفسي واجتماعي يحفظ الكرامة.",
+      icon: HeartHandshake,
+    },
+    {
+      title: "حوكمة وموثوقية",
+      desc: "تقارير موثقة ومؤشرات أثر واضحة.",
+      icon: ShieldCheck,
+    },
+  ];
+
+  const aboutBullets: string[] = [
+    "حَوْكمة مالية بشفافية وتقارير دورية للمانحين.",
+    "شراكات معتمدة مع جهات دولية ومحلية.",
+    "مسارات تبرع سريعة وآمنة عبر قنوات متعددة.",
+    "فرق ميدانية مدربة تعمل وفق معايير السلامة والجودة.",
+  ];
+
   return (
     <>
       <Header />
@@ -266,18 +303,10 @@ export default function Home() {
           <div className="space-y-4 text-right">
             <h2 className="section-title text-right">من نحن</h2>
             <p className="text-slate-700 leading-relaxed text-lg">
-              نحن جمعية إنماء الخيرية، نؤمن بأن لكل إنسان الحق في الماء
-              والتعليم والكرامة. فريقنا يعمل بمعايير دولية معتمدة، ويعتمد
-              على الابتكار في تصميم البرامج التي تصل بأمان وفاعلية إلى
-              المستفيدين.
+              نحن جمعية إنماء الخيرية، نؤمن بأن لكل إنسان الحق في الماء والتعليم والكرامة. فريقنا يعمل بمعايير دولية معتمدة، ويعتمد على الابتكار في تصميم البرامج التي تصل بأمان وفاعلية إلى المستفيدين.
             </p>
             <div className="space-y-3">
-              {[
-                "حَوْكمة مالية بشفافية وتقارير دورية للمانحين.",
-                "شراكات معتمدة مع جهات دولية ومحلية.",
-                "مسارات تبرع سريعة وآمنة عبر قنوات متعددة.",
-                "فرق ميدانية مدربة تعمل وفق معايير السلامة والجودة.",
-              ].map((item) => (
+              {aboutBullets.map((item) => (
                 <div
                   key={item}
                   className="flex items-start gap-3 rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]"
@@ -292,12 +321,8 @@ export default function Home() {
             <div className="rounded-card p-6 mt-4">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-sm text-slate-500">
-                    أحدث تقرير أثر
-                  </p>
-                  <p className="text-xl font-bold text-[var(--color-primary-dark)]">
-                    ربع سنوي - 2024
-                  </p>
+                  <p className="text-sm text-slate-500">أحدث تقرير أثر</p>
+                  <p className="text-xl font-bold text-[var(--color-primary-dark)]">ربع سنوي - 2024</p>
                 </div>
                 <Sparkles className="h-6 w-6 text-[var(--color-primary-dark)]" />
               </div>
@@ -308,9 +333,7 @@ export default function Home() {
                     className="rounded-2xl bg-[var(--color-soft)] border border-[var(--color-muted)] p-3"
                   >
                     <p className="text-slate-500">{card.title}</p>
-                    <p className="text-lg font-semibold text-[var(--color-primary-dark)]">
-                      {card.value}
-                    </p>
+                    <p className="text-lg font-semibold text-[var(--color-primary-dark)]">{card.value}</p>
                   </div>
                 ))}
               </div>
@@ -321,41 +344,13 @@ export default function Home() {
             </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              {
-                title: "مياه نقية",
-                desc: "آبار وشبكات حديثة تدعم العائلات يومياً.",
-                icon: Droplet,
-              },
-              {
-                title: "تعليم وتمكين",
-                desc: "بيئات تعليمية آمنة للأطفال والشباب.",
-                icon: BookOpenCheck,
-              },
-              {
-                title: "رعاية مجتمعية",
-                desc: "دعم نفسي واجتماعي يحفظ الكرامة.",
-                icon: HeartHandshake,
-              },
-              {
-                title: "حوكمة وموثوقية",
-                desc: "تقارير موثقة ومؤشرات أثر واضحة.",
-                icon: ShieldCheck,
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="rounded-card p-5 card-hover"
-              >
+            {aboutHighlights.map((card) => (
+              <div key={card.title} className="rounded-card p-5 card-hover">
                 <div className="h-12 w-12 rounded-2xl bg-[var(--color-muted)] flex items-center justify-center text-[var(--color-primary-dark)] mb-3">
                   <card.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-[var(--color-primary-dark)] mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  {card.desc}
-                </p>
+                <h3 className="text-lg font-bold text-[var(--color-primary-dark)] mb-2">{card.title}</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -368,34 +363,21 @@ export default function Home() {
           <div className="text-center mb-10">
             <h2 className="section-title">مبادرات جاهزة للتبرع</h2>
             <p className="section-sub">
-              اختر المبادرة التي تلامس قلبك وساهم في تغيير حياة
-              المستفيدين اليوم.
+              اختر المبادرة التي تلامس قلبك وساهم في تغيير حياة المستفيدين اليوم.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {initiativeCards.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-card p-6 card-hover h-full flex flex-col"
-              >
+              <div key={item.title} className="rounded-card p-6 card-hover h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
                   <span className="badge">{item.tag}</span>
                   <span className="text-xs text-slate-500">موثقة</span>
                 </div>
-                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-slate-700 text-sm leading-relaxed flex-1">
-                  {item.desc}
-                </p>
+                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">{item.title}</h3>
+                <p className="text-slate-700 text-sm leading-relaxed flex-1">{item.desc}</p>
                 <div className="flex items-center justify-between mt-6">
-                  <p className="text-lg font-extrabold text-[var(--color-primary-dark)]">
-                    {item.amount}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="btn-outline text-sm px-4 py-2"
-                  >
+                  <p className="text-lg font-extrabold text-[var(--color-primary-dark)]">{item.amount}</p>
+                  <a href="#contact" className="btn-outline text-sm px-4 py-2">
                     تبرع الآن
                   </a>
                 </div>
@@ -411,8 +393,7 @@ export default function Home() {
           <div className="space-y-5 order-2 lg:order-1">
             <h2 className="section-title text-right">الأثر الميداني</h2>
             <p className="section-sub text-right">
-              نعمل بشراكات محلية موثوقة ونستخدم أنظمة مراقبة رقمية للتأكد
-              من وصول المساعدات للجهات المستهدفة في الوقت المناسب.
+              نعمل بشراكات محلية موثوقة ونستخدم أنظمة مراقبة رقمية للتأكد من وصول المساعدات للجهات المستهدفة في الوقت المناسب.
             </p>
             <div className="space-y-3">
               {steps.map((step, index) => (
@@ -423,9 +404,7 @@ export default function Home() {
                   <div className="h-10 w-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center">
                     {index + 1}
                   </div>
-                  <p className="font-semibold text-slate-800">
-                    {step}
-                  </p>
+                  <p className="font-semibold text-slate-800">{step}</p>
                 </div>
               ))}
             </div>
@@ -440,50 +419,34 @@ export default function Home() {
               <div className="relative space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-slate-500">
-                      آخر تحديث
-                    </p>
-                    <p className="text-lg font-bold text-[var(--color-primary-dark)]">
-                      "المحطة الميدانية - شرق إفريقيا"
-                    </p>
+                    <p className="text-sm text-slate-500">آخر تحديث</p>
+                    <p className="text-lg font-bold text-[var(--color-primary-dark)]">"المحطة الميدانية - شرق إفريقيا"</p>
                   </div>
                   <HandHeart className="h-7 w-7 text-[var(--color-primary-dark)]" />
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
                     <p className="text-slate-500">مسارات المياه</p>
-                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">
-                      32 مشروعًا
-                    </p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">32 مشروعًا</p>
                   </div>
                   <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
                     <p className="text-slate-500">حالات طارئة</p>
-                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">
-                      12 تدخلًا
-                    </p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">12 تدخلًا</p>
                   </div>
                   <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
                     <p className="text-slate-500">برامج تعليمية</p>
-                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">
-                      18 فصلًا
-                    </p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">18 فصلًا</p>
                   </div>
                   <div className="rounded-2xl bg-[var(--color-soft)] p-4 border border-[var(--color-muted)]">
                     <p className="text-slate-500">متطوعون</p>
-                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">
-                      +540
-                    </p>
+                    <p className="text-xl font-bold text-[var(--color-primary-dark)]">+540</p>
                   </div>
                 </div>
                 <div className="rounded-2xl bg-[var(--color-primary)] text-white p-5 flex items-center justify-between shadow-lg">
                   <div>
-                    <p className="text-sm opacity-90">
-                      وقت استجابة البلاغات
-                    </p>
+                    <p className="text-sm opacity-90">وقت استجابة البلاغات</p>
                     <p className="text-2xl font-extrabold">
-                      <span className="text-[var(--color-accent)]">
-                        48
-                      </span>{" "}
+                      <span className="text-[var(--color-accent)]">48</span>{" "}
                       ساعة فقط
                     </p>
                   </div>
@@ -501,25 +464,17 @@ export default function Home() {
           <div className="text-center mb-10">
             <h2 className="section-title">برامجنا</h2>
             <p className="section-sub">
-              مسارات متخصصة تضمن أثراً متوازنًا في المياه والتعليم
-              والإغاثة، مع روح عائلية ودعم مستمر.
+              مسارات متخصصة تضمن أثراً متوازنًا في المياه والتعليم والإغاثة، مع روح عائلية ودعم مستمر.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {programCards.map((card) => (
-              <div
-                key={card.title}
-                className="rounded-card p-6 card-hover text-right h-full"
-              >
+              <div key={card.title} className="rounded-card p-6 card-hover text-right h-full">
                 <div className="h-12 w-12 rounded-2xl bg-[var(--color-muted)] flex items-center justify-center text-[var(--color-primary-dark)] mb-4">
                   <card.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-slate-700 leading-relaxed text-sm">
-                  {card.desc}
-                </p>
+                <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-2">{card.title}</h3>
+                <p className="text-slate-700 leading-relaxed text-sm">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -537,12 +492,9 @@ export default function Home() {
         />
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start relative">
           <div className="space-y-4 text-right">
-            <h2 className="text-3xl font-extrabold text-[var(--color-primary-dark)]">
-              تواصل معنا
-            </h2>
+            <h2 className="text-3xl font-extrabold text-[var(--color-primary-dark)]">تواصل معنا</h2>
             <p className="text-slate-700 leading-relaxed">
-              ندعو المانحين والشركاء للتواصل معنا لتصميم مسارات عطاء تحقق
-              أثراً فورياً وشفافاً.
+              ندعو المانحين والشركاء للتواصل معنا لتصميم مسارات عطاء تحقق أثراً فورياً وشفافاً.
             </p>
             <div className="space-y-3 text-sm text-slate-700">
               <div className="flex items-center gap-3 justify-start">
@@ -560,47 +512,24 @@ export default function Home() {
             </div>
           </div>
           <div className="rounded-card p-6 bg-white">
-            <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-4">
-              استمارة التواصل
-            </h3>
+            <h3 className="text-xl font-bold text-[var(--color-primary-dark)] mb-4">استمارة التواصل</h3>
             <form className="space-y-3">
-              <input
-                type="text"
-                placeholder="الاسم الكامل"
-                className="contact-input"
-              />
-              <input
-                type="email"
-                placeholder="البريد الإلكتروني"
-                className="contact-input"
-              />
-              <select className="contact-input">
+              <input type="text" placeholder="الاسم الكامل" className="contact-input" />
+              <input type="email" placeholder="البريد الإلكتروني" className="contact-input" />
+              <select className="contact-input" defaultValue="تبرع">
                 <option>تبرع</option>
                 <option>شراكة</option>
                 <option>استفسار عام</option>
               </select>
-              <textarea
-                rows={4}
-                placeholder="نص الرسالة"
-                className="contact-input"
-              />
-              <button
-                type="button"
-                className="btn-primary w-full justify-center"
-              >
+              <textarea rows={4} placeholder="نص الرسالة" className="contact-input" />
+              <button type="button" className="btn-primary w-full justify-center">
                 إرسال الرسالة
               </button>
             </form>
             <div className="grid grid-cols-3 gap-3 text-center text-xs text-slate-600 mt-4">
-              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">
-                Email
-              </div>
-              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">
-                Phone
-              </div>
-              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">
-                WhatsApp
-              </div>
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">Email</div>
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">Phone</div>
+              <div className="rounded-2xl bg-[var(--color-soft)] p-3 border border-[var(--color-muted)]">WhatsApp</div>
             </div>
           </div>
         </div>
